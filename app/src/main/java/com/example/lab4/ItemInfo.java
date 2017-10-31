@@ -1,6 +1,6 @@
 package com.example.lab4;
 
-/**
+/*
  * Created by qingming on 2017/10/26.
  */
 
@@ -104,7 +104,7 @@ public class ItemInfo extends AppCompatActivity {
         favoriteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(curG.getfavorite()==false){
+                if(!curG.getfavorite()){
                     favoriteImg.setImageResource(R.mipmap.full_star);
                     Toast.makeText(getApplicationContext(),"商品已收藏",Toast.LENGTH_SHORT).show();
                     curG.setfavorite(true);
@@ -139,6 +139,7 @@ public class ItemInfo extends AppCompatActivity {
         bun=curG.putInBundle();
         bun.putInt("whichView",0);
         intent.putExtras(bun);
+        //回到MainActivity
         setResult(1,intent);
         finish();
     }
