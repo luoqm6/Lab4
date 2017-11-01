@@ -39,19 +39,6 @@
         app:pressedTranslationZ="15dp"
         app:srcCompat="@mipmap/mainpage" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabwidget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_margin="50dp"
-        app:borderWidth="0dp"
-        app:backgroundTint="#ffffff"
-        app:rippleColor="#ffffff"
-        app:elevation="5dp"
-        app:pressedTranslationZ="15dp"
-        app:srcCompat="@mipmap/shoplist" />
-
 
     <include layout="@layout/content_main" />
 

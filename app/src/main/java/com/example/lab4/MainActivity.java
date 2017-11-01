@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         //两个右下角按钮的初始化以及将进入页面初始化为商品列表
         fab1 = (FloatingActionButton) findViewById(R.id.fabSL1);
         fab2 = (FloatingActionButton) findViewById(R.id.fabSL2);
-        fab3 = (FloatingActionButton) findViewById(R.id.fabwidget);
         changeToRecyclerView();
 
         //发送静态广播推送推荐商品
@@ -110,13 +109,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeToRecyclerView();
-            }
-        });
-
-        fab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BroadcastStatic(DYNAMICACTION);
             }
         });
 
