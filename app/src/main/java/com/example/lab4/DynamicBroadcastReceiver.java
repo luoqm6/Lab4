@@ -3,7 +3,9 @@ package com.example.lab4;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.icu.util.BuddhistCalendar;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.widget.RemoteViews;
 
 /**
  * Created by qingming on 2017/10/28.
@@ -49,6 +52,22 @@ public class DynamicBroadcastReceiver extends BroadcastReceiver{
             //绑定Notification，发送通知请求
             Notification notify=builder.build();
             manager.notify(0,notify);
+            //实例化RemoteView,其对应相应的Widget布局
+            RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);
+            //获取AppWidgetManager实例
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
+            //设置widget的文字为传入商品相关信息
+            updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
+            //设置widget的图片为传入商品图片
+            updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
+            bundle=tmpG.putinbundle();
+            //设置跳转至主界面所显示的列表
+            bundle.putInt("whichView",1);
+            mInent.putExtras(bundle);
+            updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
+            //更新widget显示信息
+            appWidgetManager.updateAppWidget(me,updateViews);
         }
     }
 }

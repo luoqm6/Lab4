@@ -54,8 +54,7 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onReceive(Context context,Intent intent)
-    {
+    public void onReceive(Context context,Intent intent) {
         super.onReceive(context,intent);
         //静态广播推荐信息
         if(intent.getAction().equals(STATICACTION)){
@@ -81,28 +80,28 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
         }
         //动态广播根据加入购物车商品催下单
         if(intent.getAction().equals(DYNAMICACTION)){
-            //获得intent传入信息
-            Bundle bundle=intent.getExtras();
-            Goods tmpG=new Goods(bundle);
-            //实例化RemoteView,其对应相应的Widget布局
-            RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);
-            //获取AppWidgetManager实例
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
-            //设置widget的文字为传入商品相关信息
-            updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
-            //设置widget的图片为传入商品图片
-            updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
-            //绑定intent，点击图标能够进入某activity
-            Intent mInent=new Intent(context,MainActivity.class);
-            bundle=tmpG.putinbundle();
-            //设置跳转至主界面所显示的列表
-            bundle.putInt("whichView",1);
-            mInent.putExtras(bundle);
-            PendingIntent mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
-            updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
-            //更新widget显示信息
-            appWidgetManager.updateAppWidget(me,updateViews);
+//            //获得intent传入信息
+//            Bundle bundle=intent.getExtras();
+//            Goods tmpG=new Goods(bundle);
+//            //实例化RemoteView,其对应相应的Widget布局
+//            RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);
+//            //获取AppWidgetManager实例
+//            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+//            ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
+//            //设置widget的文字为传入商品相关信息
+//            updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
+//            //设置widget的图片为传入商品图片
+//            updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
+//            //绑定intent，点击图标能够进入某activity
+//            Intent mInent=new Intent(context,MainActivity.class);
+//            bundle=tmpG.putinbundle();
+//            //设置跳转至主界面所显示的列表
+//            bundle.putInt("whichView",1);
+//            mInent.putExtras(bundle);
+//            PendingIntent mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
+//            updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
+//            //更新widget显示信息
+//            appWidgetManager.updateAppWidget(me,updateViews);
         }
     }
 
