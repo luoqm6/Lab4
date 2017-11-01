@@ -1,0 +1,45 @@
+Index: app/src/main/res/layout/example_app_widget_provider.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/example_app_widget_provider.xml	(date 1509505452000)
++++ app/src/main/res/layout/example_app_widget_provider.xml	(revision )
+@@ -5,6 +5,7 @@
+     android:padding="@dimen/widget_margin">
+ 
+     <ImageView
++        android:contentDescription="@string/appwidget_text"
+         android:layout_marginStart="5dp"
+         android:id="@+id/widgetImg"
+         android:layout_width="60dp"
+@@ -24,12 +25,4 @@
+         android:layout_toEndOf="@+id/widgetImg"
+         android:textSize="15sp"
+         android:textStyle="bold|italic" />
+-    <!--<Button-->
+-        <!--android:id="@+id/appwidget_button"-->
+-        <!--android:layout_margin="5dp"-->
+-        <!--android:layout_width="40dp"-->
+-        <!--android:layout_height="40dp"-->
+-        <!--android:textSize="15sp"-->
+-        <!--android:layout_toEndOf="@+id/appwidget_text"-->
+-        <!--android:text="C"/>-->
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/lab4/ExampleAppWidgetProvider.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/lab4/ExampleAppWidgetProvider.java	(date 1509505452000)
++++ app/src/main/java/com/example/lab4/ExampleAppWidgetProvider.java	(revision )
+@@ -81,7 +81,7 @@
+             RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);//实例化RemoteView,其对应相应的Widget布局
+             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);//获取AppWidgetManager实例
+             ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
+-            updateViews.setTextViewText(R.id.appwidget_text,tmpG.getname()+"已加入购物车，快下单！");
++            updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
+             //Toast.makeText(context,tmpG.getname()+"已加入购物车",Toast.LENGTH_LONG).show();
+             updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
+ 

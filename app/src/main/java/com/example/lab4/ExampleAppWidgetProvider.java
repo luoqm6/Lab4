@@ -81,7 +81,7 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
             RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);//实例化RemoteView,其对应相应的Widget布局
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);//获取AppWidgetManager实例
             ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
-            updateViews.setTextViewText(R.id.appwidget_text,tmpG.getname()+"已加入购物车，快下单！");
+            updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
             //Toast.makeText(context,tmpG.getname()+"已加入购物车",Toast.LENGTH_LONG).show();
             updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
 
