@@ -98,7 +98,6 @@ public class ItemInfo extends AppCompatActivity {
                 EventBus.getDefault().post(new MessageEvent(curG));
                 //点击购物车图标时候，发送动态广播
                 BroadcastDynamic(DYNAMICACTION);
-                BroadcastDynamic(DYNAMICACTION);
             }
         });
         /*z点星星收藏商品*/

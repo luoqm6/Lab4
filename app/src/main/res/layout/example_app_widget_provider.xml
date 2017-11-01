@@ -5,6 +5,7 @@
     android:padding="@dimen/widget_margin">
 
     <ImageView
+        android:layout_marginStart="5dp"
         android:id="@+id/widgetImg"
         android:layout_width="60dp"
         android:layout_height="60dp"

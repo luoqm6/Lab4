@@ -54,12 +54,12 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
         if(intent.getAction().equals(STATICACTION)){
             Bundle bundle=intent.getExtras();
             Goods tmpG=new Goods(bundle);
-            Toast.makeText(context,tmpG.getname(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,tmpG.getname(),Toast.LENGTH_LONG).show();
             RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);//实例化RemoteView,其对应相应的Widget布局
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);//获取AppWidgetManager实例
             ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
             updateViews.setTextViewText(R.id.appwidget_text,tmpG.getname()+"仅售"+tmpG.getprice()+"!");
-            Toast.makeText(context,tmpG.getname()+"仅售"+tmpG.getprice(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,tmpG.getname()+"仅售"+tmpG.getprice(),Toast.LENGTH_LONG).show();
             updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
 
 
@@ -67,15 +67,37 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
             Intent mInent=new Intent(context,ItemInfo.class);
             mInent.putExtras(tmpG.putinbundle());
             PendingIntent mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
-            updateViews.setOnClickPendingIntent(R.id.appwidget_text,mPendingIntent);
-            updateViews.setOnClickPendingIntent(R.id.widgetImg,mPendingIntent);
+            //updateViews.setOnClickPendingIntent(R.id.appwidget_text,mPendingIntent);
+            //updateViews.setOnClickPendingIntent(R.id.widgetImg,mPendingIntent);
             updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
 
             appWidgetManager.updateAppWidget(me,updateViews);
             //绑定Notification，发送通知请求
         }
         if(intent.getAction().equals(DYNAMICACTION)){
+            Bundle bundle=intent.getExtras();
+            Goods tmpG=new Goods(bundle);
+            //Toast.makeText(context,tmpG.getname()+"加入购物车",Toast.LENGTH_LONG).show();
+            RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);//实例化RemoteView,其对应相应的Widget布局
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);//获取AppWidgetManager实例
+            ComponentName me=new ComponentName(context,ExampleAppWidgetProvider.class);
+            updateViews.setTextViewText(R.id.appwidget_text,tmpG.getname()+"已加入购物车，快下单！");
+            //Toast.makeText(context,tmpG.getname()+"已加入购物车",Toast.LENGTH_LONG).show();
+            updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
 
+
+            //绑定intent，点击图标能够进入某activity
+            Intent mInent=new Intent(context,MainActivity.class);
+            bundle=tmpG.putinbundle();
+            bundle.putInt("whichView",1);
+            mInent.putExtras(bundle);
+            PendingIntent mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
+            //updateViews.setOnClickPendingIntent(R.id.appwidget_text,mPendingIntent);
+            //updateViews.setOnClickPendingIntent(R.id.widgetImg,mPendingIntent);
+            updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
+
+            appWidgetManager.updateAppWidget(me,updateViews);
+            //绑定Notification，发送通知请求
         }
     }
 
