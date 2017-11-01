@@ -1,7 +1,10 @@
 package com.example.lab4;
 
+import android.app.ActionBar;
+import android.appwidget.AppWidgetManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,7 +14,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -52,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
     //这两个声明放在onCreate外面不能初始化byid！！！！！！！！！！！！！！！！！！！！！！！！！！
     private FloatingActionButton fab1 ;
     private FloatingActionButton fab2 ;
+    private FloatingActionButton fab3 ;
     //这两个声明放在onCreate外面不能初始化byid！！！！！！！！！！！！！！！！！！！！！！！！！！
 
     //广播使用的filter
     String STATICACTION="com.example.lab4.STATICACTION";
-
+    private static final String DYNAMICACTION = "com.example.lab4.DYNAMICACTION";
+    DynamicBroadcastReceiver dynamicBroadcastReceiver=new DynamicBroadcastReceiver();
 
 
     @Override
@@ -82,13 +89,16 @@ public class MainActivity extends AppCompatActivity {
         //两个右下角按钮的初始化以及将进入页面初始化为商品列表
         fab1 = (FloatingActionButton) findViewById(R.id.fabSL1);
         fab2 = (FloatingActionButton) findViewById(R.id.fabSL2);
+        fab3 = (FloatingActionButton) findViewById(R.id.fabwidget);
         changeToRecyclerView();
 
         //发送静态广播推送推荐商品
         BroadcastStatic(STATICACTION);
 
-
-
+        //注册动态广播关键代码:
+        IntentFilter dynamic_filter = new IntentFilter();
+        dynamic_filter.addAction(DYNAMICACTION);
+        registerReceiver(dynamicBroadcastReceiver,dynamic_filter);
 
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +113,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BroadcastStatic(DYNAMICACTION);
+            }
+        });
 
         //RecyclerView实现物品清单begin/////////////////
         final RecyclerView mRecyclerView;
         final CommonAdapter recycleAdapter;
         final RecyclerView.LayoutManager mLayoutManager;
+
 
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -126,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view,int position) {
                 s=listItems1.get(position);
                 Goods tmpG=s.get("Goods");
+
+                /*跳转至商品详情界面*/
                 Bundle bundle = tmpG.putInBundle();
                 Intent intent=new Intent();
                 intent.putExtras(bundle);

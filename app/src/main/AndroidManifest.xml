@@ -37,6 +37,17 @@
                 <action android:name="com.example.lab4.STATICACTION"/>
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".ExampleAppWidgetProvider">
+            <intent-filter>
+                <action android:name="com.example.lab4.STATICACTION"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/example_app_widget_provider_info" />
+        </receiver>
+
         <dependency>
             <groupId>org.greenrobot</groupId>
             <artifactId>eventbus</artifactId>

@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin">
+
+    <ImageView
+        android:id="@+id/widgetImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/shoplist"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        android:textColor="#ffffff"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/widgetImg"
+        android:textSize="15sp"
+        android:textStyle="bold|italic" />
+    <!--<Button-->
+        <!--android:id="@+id/appwidget_button"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:textSize="15sp"-->
+        <!--android:layout_toEndOf="@+id/appwidget_text"-->
+        <!--android:text="C"/>-->
+</RelativeLayout>

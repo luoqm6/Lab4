@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
 
 /**
  * Created by qingming on 2017/10/26.
