@@ -17,6 +17,7 @@ import android.os.Bundle;
 
 public class StaticBroadcastReceiver extends BroadcastReceiver{
     private static String STATICACTION="com.example.lab4.STATICACTION";
+    private static int num=0;
     @Override
     public void onReceive(Context context, Intent intent){
         if(intent.getAction().equals(STATICACTION)){
@@ -40,12 +41,14 @@ public class StaticBroadcastReceiver extends BroadcastReceiver{
                     .setAutoCancel(true);//设置这个标志当用户单击面板就可以将通知取消
             //绑定intent，点击图标能够进入某activity
             Intent mInent=new Intent(context,ItemInfo.class);
+            mInent.addCategory(Intent.CATEGORY_LAUNCHER);
+            //mInent.addCategory(Intent.CATEGORY_DEFAULT);
             mInent.putExtras(tmpG.putinbundle());
             PendingIntent mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setContentIntent(mPendingIntent);
             //绑定Notification，发送通知请求
             Notification notify=builder.build();
-            manager.notify(0,notify);
+            manager.notify(num++,notify);
         }
     }
     public Resources getResources(Context context) {

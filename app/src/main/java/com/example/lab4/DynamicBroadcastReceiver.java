@@ -21,6 +21,7 @@ import android.widget.RemoteViews;
 
 public class DynamicBroadcastReceiver extends BroadcastReceiver{
     private static final String DYNAMICACTION = "com.example.lab4.DYNAMICACTION";
+    private static int num;
     public void onReceive(Context context, Intent intent){
         if(intent.getAction().equals(DYNAMICACTION)){
             Bundle bundle = intent.getExtras();
@@ -43,6 +44,8 @@ public class DynamicBroadcastReceiver extends BroadcastReceiver{
                     .setAutoCancel(true);//设置这个标志当用户单击面板就可以将通知取消
             //绑定intent，点击图标能够进入某activity
             Intent mInent=new Intent(context,MainActivity.class);
+            //mInent.addCategory(Intent.CATEGORY_LAUNCHER);
+            mInent.addCategory(Intent.CATEGORY_DEFAULT);
             bundle=tmpG.putinbundle();
             bundle.putInt("whichView",1);
             mInent.putExtras(bundle);
@@ -51,7 +54,11 @@ public class DynamicBroadcastReceiver extends BroadcastReceiver{
             builder.setContentIntent(mPendingIntent);
             //绑定Notification，发送通知请求
             Notification notify=builder.build();
-            manager.notify(0,notify);
+            manager.notify(num++,notify);
+
+            //动态广播设置widget根据加入购物车商品催下单
+            //绑定intent，点击图标能够进入某activity
+            mPendingIntent=PendingIntent.getActivity(context,0,mInent,PendingIntent.FLAG_UPDATE_CURRENT);
             //实例化RemoteView,其对应相应的Widget布局
             RemoteViews updateViews=new RemoteViews(context.getPackageName(),R.layout.example_app_widget_provider);
             //获取AppWidgetManager实例
@@ -61,13 +68,11 @@ public class DynamicBroadcastReceiver extends BroadcastReceiver{
             updateViews.setTextViewText(R.id.appwidget_text,"马上下单！！！\n"+tmpG.getname()+"已加入购物车");
             //设置widget的图片为传入商品图片
             updateViews.setImageViewResource(R.id.widgetImg,tmpG.getimgId());
-            bundle=tmpG.putinbundle();
-            //设置跳转至主界面所显示的列表
-            bundle.putInt("whichView",1);
-            mInent.putExtras(bundle);
             updateViews.setOnClickPendingIntent(R.id.widgetView,mPendingIntent);
+
             //更新widget显示信息
             appWidgetManager.updateAppWidget(me,updateViews);
+
         }
     }
 }

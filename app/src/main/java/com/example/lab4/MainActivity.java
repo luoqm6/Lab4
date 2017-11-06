@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     //广播使用的filter
     String STATICACTION="com.example.lab4.STATICACTION";
-    private static final String DYNAMICACTION = "com.example.lab4.DYNAMICACTION";
-    DynamicBroadcastReceiver dynamicBroadcastReceiver=new DynamicBroadcastReceiver();
 
 
     @Override
@@ -94,10 +92,6 @@ public class MainActivity extends AppCompatActivity {
         //发送静态广播推送推荐商品
         BroadcastStatic(STATICACTION);
 
-        //注册动态广播关键代码:
-        IntentFilter dynamic_filter = new IntentFilter();
-        dynamic_filter.addAction(DYNAMICACTION);
-        registerReceiver(dynamicBroadcastReceiver,dynamic_filter);
 
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     public void onDestroy() {

@@ -41,7 +41,6 @@
         <receiver android:name=".ExampleAppWidgetProvider">
             <intent-filter>
                 <action android:name="com.example.lab4.STATICACTION"/>
-                <!--<action android:name="com.example.lab4.DYNAMICACTION"/>-->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data

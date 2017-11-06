@@ -142,6 +142,7 @@ public class ItemInfo extends AppCompatActivity {
         //回到MainActivity
         setResult(1,intent);
         finish();
+        //startActivity(intent);
     }
     public void BroadcastDynamic(String message){
         Bundle bundle = curG.putInBundle();
