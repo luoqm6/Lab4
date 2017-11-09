@@ -309,5 +309,6 @@ public class MainActivity extends AppCompatActivity {
         fab1.setVisibility(View.GONE);
         fab2.setVisibility(View.VISIBLE);
     }
+    /////////////////////////////////////////////
 }
 
